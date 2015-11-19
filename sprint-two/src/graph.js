@@ -33,30 +33,18 @@ Graph.prototype.removeNode = function(node) {
 // ------------------------
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
 Graph.prototype.hasEdge = function(fromNode, toNode) {
-  //var args = JSON.stringify(arguments);
   var args =fromNode+ ',' +toNode;
-  //var edgeArr = Array.prototype.slice.call(arguments);
-  //var contains = false;
 
   return args in this.edges ? true : false; 
-  //return contains;
 };
 
 // ------------------------
 // Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode) {
-  // var args = JSON.stringify(arguments);
-  // var edgeArr = Array.prototype.slice.call(arguments);
-  // var edgeArrReverse = edgeArr.slice(0).reverse();
-  // var revObj = {};
-  // revObj[0] = toNode;
-  // revObj[1] = fromNode;
-  // var revArgs = JSON.stringify(revObj); 
+  
   var arr1 = [fromNode, toNode];
   var arr2 = [toNode, fromNode];
 
-  //this.edges[fromNode.toString().concat(toNode.toString())] = fromNode+toNode;
-  //this.edges[toNode+fromNode] = [toNode, fromNode];
   this.edges[arr1] = arr1;
   this.edges[arr2] = arr2;
 };
@@ -64,16 +52,13 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
 // ------------------------
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
-  // var args = JSON.stringify(arguments);
-  // var edgeArr = Array.prototype.slice.call(arguments);
-  // var edgeArrReverse = edgeArr.slice(0).reverse();
+  
   var key1 = fromNode+ ',' +toNode;
   var key2 = toNode+ ',' +fromNode;
   
   delete this.edges[key1];
   delete this.edges[key2];
 
-  //delete this.edges[JSON.stringify(edgeArrReverse)];
 
 };
 
