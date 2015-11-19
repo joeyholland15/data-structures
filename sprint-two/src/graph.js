@@ -46,9 +46,16 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
 Graph.prototype.addEdge = function(fromNode, toNode) {
   var args = JSON.stringify(arguments);
   var edgeArr = Array.prototype.slice.call(arguments);
-  var edgeArrReverse = edgeArr.slice().reverse();
+  //var edgeArrReverse = edgeArr.slice(0).reverse();
+  var revObj = {};
+  revObj[0] = toNode;
+  revObj[1] = fromNode;
+  var revArgs = JSON.stringify(revObj); 
+
+  //this.edges[fromNode.toString().concat(toNode.toString())] = fromNode+toNode;
+  //this.edges[toNode+fromNode] = [toNode, fromNode];
   this.edges[args] = edgeArr;
-  this.edges[JSON.stringify(edgeArrReverse)] = edgeArrReverse;
+  this.edges[revArgs] = edgeArr.slice(0).reverse;
 };
 
 // ------------------------
@@ -56,7 +63,7 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
 Graph.prototype.removeEdge = function(fromNode, toNode) {
   var args = JSON.stringify(arguments);
   var edgeArr = Array.prototype.slice.call(arguments);
-  var edgeArrReverse = edgeArr.slice().reverse();
+  var edgeArrReverse = edgeArr.slice(0).reverse();
   delete this.edges[args];
   delete this.edges[JSON.stringify(edgeArrReverse)];
 
