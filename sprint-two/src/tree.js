@@ -3,16 +3,16 @@ var Tree = function(value) {
   newTree.value = value;
 
   // your code here
-  newTree.children = null;  // fix me
-
+  newTree.children = [];  // fix me
+  _.extend(newTree, treeMethods); 
   return newTree;
 };
 
 var treeMethods = {};
 
 treeMethods.addChild = function(value) {
-  // your code here
-  newTree.children = null;  // fix me
+  var childTree = Tree(value);
+  this.children.push(childTree);  // fix me
 };
 
 treeMethods.contains = function(target) {
