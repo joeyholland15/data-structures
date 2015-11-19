@@ -33,7 +33,8 @@ Graph.prototype.removeNode = function(node) {
 // ------------------------
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
 Graph.prototype.hasEdge = function(fromNode, toNode) {
-  var args = JSON.stringify(arguments);
+  //var args = JSON.stringify(arguments);
+  var args =fromNode+ ',' +toNode;
   //var edgeArr = Array.prototype.slice.call(arguments);
   //var contains = false;
 
@@ -44,34 +45,44 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
 // ------------------------
 // Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode) {
-  var args = JSON.stringify(arguments);
-  var edgeArr = Array.prototype.slice.call(arguments);
-  //var edgeArrReverse = edgeArr.slice(0).reverse();
-  var revObj = {};
-  revObj[0] = toNode;
-  revObj[1] = fromNode;
-  var revArgs = JSON.stringify(revObj); 
+  // var args = JSON.stringify(arguments);
+  // var edgeArr = Array.prototype.slice.call(arguments);
+  // var edgeArrReverse = edgeArr.slice(0).reverse();
+  // var revObj = {};
+  // revObj[0] = toNode;
+  // revObj[1] = fromNode;
+  // var revArgs = JSON.stringify(revObj); 
+  var arr1 = [fromNode, toNode];
+  var arr2 = [toNode, fromNode];
 
   //this.edges[fromNode.toString().concat(toNode.toString())] = fromNode+toNode;
   //this.edges[toNode+fromNode] = [toNode, fromNode];
-  this.edges[args] = edgeArr;
-  this.edges[revArgs] = edgeArr.slice(0).reverse;
+  this.edges[arr1] = arr1;
+  this.edges[arr2] = arr2;
 };
 
 // ------------------------
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
-  var args = JSON.stringify(arguments);
-  var edgeArr = Array.prototype.slice.call(arguments);
-  var edgeArrReverse = edgeArr.slice(0).reverse();
-  delete this.edges[args];
-  delete this.edges[JSON.stringify(edgeArrReverse)];
+  // var args = JSON.stringify(arguments);
+  // var edgeArr = Array.prototype.slice.call(arguments);
+  // var edgeArrReverse = edgeArr.slice(0).reverse();
+  var key1 = fromNode+ ',' +toNode;
+  var key2 = toNode+ ',' +fromNode;
+  
+  delete this.edges[key1];
+  delete this.edges[key2];
+
+  //delete this.edges[JSON.stringify(edgeArrReverse)];
 
 };
 
 // ------------------------
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
+  for(var key in this.nodes){
+    cb(this.nodes[key]);
+  }
 };
 
 /*
