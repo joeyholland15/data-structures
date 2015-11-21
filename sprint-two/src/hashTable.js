@@ -1,4 +1,4 @@
-
+   
 
 var HashTable = function() {
   this._limit = 8;
@@ -44,6 +44,7 @@ HashTable.prototype.remove = function(k) {
     };
   }
 };
+
 
 
 
