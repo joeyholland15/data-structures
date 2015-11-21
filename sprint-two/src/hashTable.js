@@ -23,27 +23,36 @@ HashTable.prototype.insert = function(k, v) {
   }
 };
 
-HashTable.prototype.retrieve = function(k) {
+HashTable.prototype.find = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   var bucket = this._storage.get(index);
-  for(var i = 0; i < bucket.length; i++) {
+  for(var i = 0; i<bucket.length; i++) {
     if(k === bucket[i][0]) {
-      return bucket[i][1]; 
-    };
+      return i; 
+    }
+  }
+}
+
+HashTable.prototype.retrieve = function(k) {
+  var index = getIndexBelowMaxForKey(k, this._limit);
+  var position = this.find(k);
+  if(position !== undefined) {
+    return this._storage.get(index)[position][1]; 
   }
 };
 
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  var bucket = this._storage.get(index);
-  for(var i = 0; i < bucket.length; i++) {
-    if(k === bucket[i][0]) {
-      var holder = bucket[i][1]; 
-      delete bucket[i][1]; 
-      return holder; 
-    };
+  var position = this.find(k);
+  if(position !== undefined) {
+    var holder = this._storage.get(index)[position][1]; 
+    this._storage.get(index).splice(position, 1);
+    return holder; 
   }
 };
+
+
+
 
 
 

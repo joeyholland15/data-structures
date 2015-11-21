@@ -19,16 +19,19 @@ treeMethods.addChild = function(value) {
 
 treeMethods.contains = function(target, node) {
   var node = node || this;
+  var status = false;
 
   if(node.value === target) {
-    return true; 
+    status = true;
+    return status; 
   }
   for(var i = 0; i < node.children.length; i++) {
     if(node.children.length > 0) {
-      return node.contains(target, node.children[i]);
+      var childResult = node.contains(target, node.children[i]);
+      status = status || childResult;
     }
   };
-  return false; 
+  return status; 
 };
 
 treeMethods.removeFromParent = function(){
