@@ -52,5 +52,19 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+  it('should perform a callback function on each node using traverse', function() {
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild(7);
+    tree.children[1].addChild(8);
+    var num = 0; 
+    tree.traverse(function(node) {
+      if(typeof node.value === "number") {
+        num += node.value; 
+      }
+    });
+    expect(num).to.equal(26); 
+  });
+
 
 });
