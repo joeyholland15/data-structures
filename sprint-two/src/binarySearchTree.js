@@ -58,6 +58,25 @@ binarySearchMethods.depthFirstLog = function(callback) {
   execute(this); 
 }
 
+binarySearchMethods.breadthFirstLog = function(callback) {
+  function execute(node, arr) {
+    arr = arr || [];
+    callback(node.value); 
+    if(node.left !== null) {
+      arr.push(node.left); 
+    }
+    if(node.right !== null) {
+      arr.push(node.right);
+    }
+    //for(var i=0;i<arr.length;i++){
+    if(arr.length > 0){
+      execute(arr[0], arr.slice(1));
+    }
+    //}
+  }
+  execute(this);
+}
+
 /*
  * Complexity: What is the time complexity of the above functions?
  */
