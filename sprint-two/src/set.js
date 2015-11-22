@@ -8,7 +8,10 @@ var setPrototype = {};
 
 setPrototype.add = function(item) {
   //this._storage = {};
+
+  //typeof item === 'number' ? this._storage[item] = item.toString() : 
   this._storage[item] = item;
+
 };
 
 setPrototype.contains = function(item) {
